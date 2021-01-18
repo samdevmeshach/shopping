@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="@localhost" uuid="322c6102-9440-4ad8-840e-750f5112a5e3">
+      <database-info product="Mongo DB" version="4.4.1-rc0" jdbc-version="4.2" driver-name="MongoDB JDBC Driver" driver-version="1.9.1" dbms="MONGO" exact-version="4.4.1" exact-driver-version="1.9" />
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>master_key</secret-storage>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema">
+            <name qname="@" />
+            <name qname="ecommerce" />
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
+  </component>
+</project>
