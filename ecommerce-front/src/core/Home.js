@@ -1,8 +1,8 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,Fragment} from 'react'
 import Layout from './Layout'
 import {getProducts} from "./apiCore";
 import MediaCard from './Card'
-
+import Search from "./Search";
 const Home = () => {
 
     const [productsBySell,setProductsBySell] = useState([]);
@@ -32,21 +32,22 @@ const Home = () => {
     },[])
 
     return (
-        <Layout title="Home Page" description="E-commerce App" className="container-fluid">
-            <h2>New Arrival</h2>
-            <div className="row">
-                { productsByArrival.map((product,i) => {
-                    return <MediaCard product={product} key={i} />
-                })}
-            </div>
-            <hr />
-            <h2>Best Seller</h2>
-            <div className="row">
-                { productsBySell.map((product,i) => {
-                    return <MediaCard product={product} key={i} />
-                })}
-            </div>
-        </Layout>
+            <Layout title="Home Page" description="E-commerce App" className="container-fluid mt-4">
+                <Search />
+                <h2>New Arrival</h2>
+                <div className="row">
+                    { productsByArrival.map((product,i) => {
+                        return <MediaCard product={product} key={i} />
+                    })}
+                </div>
+                <hr />
+                <h2>Best Seller</h2>
+                <div className="row">
+                    { productsBySell.map((product,i) => {
+                        return <MediaCard product={product} key={i} />
+                    })}
+                </div>
+            </Layout>
     )
 }
 

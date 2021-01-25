@@ -14,7 +14,12 @@ const isActive = (history,path) =>{
 const Menu = ({history}) => {
     return (
         <div>
-            <ul className="nav nav-tabs bg-primary">
+            <ul className="nav nav-tabs bg-secondary">
+                <div className="navbar-brand" href="#">
+                    <img src="" width="30" height="30"
+                         className="d-inline-block align-top" alt="" />
+                    Meena Store
+                </div>
                 <li className="nav-items">
                     <Link className="nav-link" style={isActive(history,"/")} to="/"> Home </Link>
                 </li>
@@ -33,7 +38,7 @@ const Menu = ({history}) => {
                     </li>
                 )}
 
-                
+
                 {!isAuthenticated() && (
                     <Fragment>
                         <li className="nav-items">
@@ -46,13 +51,13 @@ const Menu = ({history}) => {
                 )}
                 {isAuthenticated() && (
                     <li className="nav-items">
-                        <span className="nav-link" style={{cursor:"pointer",color:"#ffffff"}} 
+                        <span className="nav-link" style={{cursor:"pointer",color:"#ffffff"}}
                             onClick={() => signout(() => {
                                 history.push('/')
                             })}>
-                                Signout 
+                                Signout
                         </span>
-                    </li>   
+                    </li>
                 )}
             </ul>
         </div>
