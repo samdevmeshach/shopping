@@ -53,7 +53,7 @@ const Product = (props) => {
                     <div className="row">
                         {
                             relatedProduct.map((product,i) => {
-                                return <RelatedProductCard product={product} key={i} />
+                                return <MediaCard product={product} size="col-sm-4" key={i} />
                             })
                         }
                     </div>

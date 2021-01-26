@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,7 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import API from "../config";
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
+import {addItem} from './cartHelper'
 
 const useStyles = makeStyles({
     root: {
@@ -20,11 +21,28 @@ const useStyles = makeStyles({
     },
 });
 
-const MediaCard = ({product}) => {
+const MediaCard = ({product,size="col-sm-3"}) => {
+
+    const [redirect,setRedirect] = useState(false)
+
+    const addToCart = () => {
+        addItem(product,() => {
+            setRedirect(true)
+        })
+    }
+
+    const shouldRedirect = redirect => {
+        if(redirect) {
+            return <Redirect to="/cart" />
+        }
+    }
+
+
     const classes = useStyles();
     return (
-        <div className="col-sm-3">
+        <div className={size}>
         <Card className={classes.root}>
+            {shouldRedirect(redirect)}
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
@@ -49,7 +67,7 @@ const MediaCard = ({product}) => {
                         View Product
                     </Button>
                 </Link>
-                <Button variant="outlined" color="primary" >
+                <Button onClick={addToCart} variant="outlined" color="primary" >
                     Add to Cart
                 </Button>
             </CardActions>
