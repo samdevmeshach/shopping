@@ -1,7 +1,7 @@
 import React,{useState,useEffect,Fragment} from 'react'
 import Layout from './Layout'
 import {getProducts} from "./apiCore";
-import MediaCard from './Card'
+import Card from './Card'
 import Search from "./Search";
 const Home = () => {
 
@@ -15,6 +15,7 @@ const Home = () => {
                 setError(data.error)
             }else {
                 setProductsBySell(data)
+                console.log('home',data)
             }
         })
 
@@ -37,14 +38,14 @@ const Home = () => {
                 <h2>New Arrival</h2>
                 <div className="row">
                     { productsByArrival.map((product,i) => {
-                        return <MediaCard product={product} key={i} />
+                        return <Card product={product} key={i} />
                     })}
                 </div>
                 <hr />
                 <h2>Best Seller</h2>
                 <div className="row">
                     { productsBySell.map((product,i) => {
-                        return <MediaCard product={product} key={i} />
+                        return <Card product={product} key={i} />
                     })}
                 </div>
             </Layout>

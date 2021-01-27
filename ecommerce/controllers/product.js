@@ -173,6 +173,7 @@ exports.update = (req,res) =>{
 
      Product.find({_id:{$ne:req.product},category:req.product.category})
         .limit(limit)
+         .select("-photo")
         .populate('category','_id name')
         .exec((err,products) =>{
             if(err){
@@ -280,5 +281,24 @@ exports.listSearch = (req,res) => {
         }
         res.json(products)
     })
+}
 
+exports.decreaseQuantity = (req,res,next) => {
+    let bulkOps = req.body.order.products.map((item) => {
+        return {
+            updateOne: {
+                filter: {_id: item._id},
+                update: {$inc: {quantity: -item.count, sold: +item.count}}
+            }
+        }
+    })
+
+    Product.bulkWrite(bulkOps,{},(error,data) => {
+        if(error){
+            return res.status(400).json({
+                error:"Could not update product"
+            })
+        }
+        next();
+    })
 }

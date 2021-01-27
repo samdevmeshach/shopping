@@ -2,10 +2,9 @@ import React,{useState,useEffect,Fragment} from 'react'
 import Layout from './Layout'
 import {read,relatedProducts} from "./apiCore";
 import Menu from "./Menu";
-import MediaCard from './Card'
+import Card from './Card'
 import Search from "./Search";
-import ProductCard from "./ProductCard";
-import RelatedProductCard from "./RelatedProductCard";
+import Grid from '@material-ui/core/Grid'
 
 
 const Product = (props) => {
@@ -28,6 +27,7 @@ const Product = (props) => {
                     setError(data.error)
                 }else {
                     setRelatedProduct(data)
+                    console.log('relatedProduct',data)
                 }
             })
     }
@@ -45,7 +45,10 @@ const Product = (props) => {
                     {
                         product &&
                         product.description &&
-                        <ProductCard product={product} />
+                        <Card
+                            product={product}
+                            showViewProductButton={false}
+                        />
                     }
                 </div>
                 <div className="col-sm-7">
@@ -53,7 +56,7 @@ const Product = (props) => {
                     <div className="row">
                         {
                             relatedProduct.map((product,i) => {
-                                return <MediaCard product={product} size="col-sm-4" key={i} />
+                                return <Card product={product} key={i} />
                             })
                         }
                     </div>

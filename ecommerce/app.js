@@ -8,6 +8,7 @@ const authRoutes = require("./routes/auth")
 const userRoutes = require("./routes/user")
 const productRoutes = require("./routes/product")
 const categoryRoutes = require("./routes/category")
+const orderRoutes = require("./routes/order")
 const expressValidator = require("express-validator")
 
 require("dotenv").config()
@@ -27,11 +28,13 @@ app.use(cookieParser())
 app.use(expressValidator())
 app.use(cors())
 
+
 //Routes middleware
 app.use("/api",authRoutes);
 app.use("/api",userRoutes);
 app.use("/api",categoryRoutes);
 app.use("/api",productRoutes);
+app.use("/api",orderRoutes);
 
 const port = process.env.PORT || 8000;
 

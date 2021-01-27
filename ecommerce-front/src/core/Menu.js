@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
-import{Link,withRouter} from 'react-router-dom'
+import {Link, Redirect, withRouter} from 'react-router-dom'
 import {signout,isAuthenticated} from '../auth'
 import {totalItem} from './cartHelper'
+import Search from "./Search";
 
 const isActive = (history,path) =>{
     if(history.location.pathname === path){
@@ -13,13 +14,15 @@ const isActive = (history,path) =>{
 }
 
 const Menu = ({history}) => {
+
+
     return (
         <div>
             <ul className="nav nav-tabs bg-secondary">
-                <div className="navbar-brand" href="#">
+                <div className="navbar-brand" href="/home">
                     <img src="" width="30" height="30"
                          className="d-inline-block align-top" alt="" />
-                    Meena Store
+                    <a className="text-light text-decoration-none" >Meena Store</a>
                 </div>
                 <li className="nav-items">
                     <Link className="nav-link" style={isActive(history,"/")} to="/">
@@ -69,6 +72,9 @@ const Menu = ({history}) => {
                         </span>
                     </li>
                 )}
+                {/*<li className="nav-items">*/}
+                {/*    <Search/>*/}
+                {/*</li>*/}
             </ul>
         </div>
     )

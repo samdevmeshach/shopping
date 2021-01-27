@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import { Link } from 'react-router-dom';
-// import Checkout from './Checkout';
+import Checkout from './Checkout';
 import MediaCard from "./Card";
 import {getCart} from './cartHelper'
-import RelatedProductCard from "./RelatedProductCard";
+import {isAuthenticated} from "../auth";
 
 const Cart = () => {
     const [items, setItems] = useState([]);
@@ -12,9 +12,8 @@ const Cart = () => {
     const [run, setRun] = useState(false);
 
     useEffect(() => {
-        console.log('MAX DEPTH ...');
         setItems(getCart());
-    }, [items]);
+    }, [run]);
 
     const showItems = items => {
         return (
@@ -22,7 +21,7 @@ const Cart = () => {
                 <h2>Your cart has {`${items.length}`} items</h2>
                 <hr />
                 {items.map((product, i) => (
-                    <RelatedProductCard
+                    <MediaCard
                         key={i}
                         product={product}
                         showAddToCartButton={false}
@@ -30,6 +29,7 @@ const Cart = () => {
                         showRemoveProductButton={true}
                         setRun={setRun}
                         run={run}
+                        size="col-sm-5"
                     />
                 ))}
             </div>
@@ -37,10 +37,14 @@ const Cart = () => {
     };
 
     const noItemsMessage = () => (
-        <h2>
-            Your Cart is empty. <br />
-            <Link to="/shop"> Continue shopping. </Link>
-        </h2>
+        <h3>
+            <div className="text-danger">Your Cart is empty</div> <br />
+            <Link to="/shop">
+                <button className="btn btn-warning">
+                    Continue shopping
+                </button>
+            </Link>
+        </h3>
     );
 
     return (
@@ -52,7 +56,11 @@ const Cart = () => {
                 <div className="col-6">
                     <h2>Your Cart Summary</h2>
                     <hr />
-                    {/*<Checkout products={items} />*/}
+                    <Checkout
+                        products={items}
+                        setRun={setRun}
+                        run={run}
+                    />
                 </div>
             </div>
         </Layout>

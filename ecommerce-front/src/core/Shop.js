@@ -4,7 +4,7 @@ import {getProducts,getCategories,getFilteredProducts} from "./apiCore";
 import Checkbox from "./Checkbox";
 import {prices} from './fixedPrice'
 import RadioBox from './RadioBox'
-import MediaCard from "./Card";
+import Card from "./Card";
 
 
 const Shop = () => {
@@ -121,7 +121,7 @@ const Shop = () => {
                 <div className="col-9">
                     <div className="row">
                         { filterdResults.map((product,i) => {
-                            return <MediaCard product={product} key={i} />
+                            return <Card product={product} key={i} />
                         })}
                     </div>
                     <hr />
