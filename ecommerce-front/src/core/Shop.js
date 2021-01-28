@@ -99,7 +99,7 @@ const Shop = () => {
     }
 
     return(
-        <Layout title="Shop Page" description="E-commerce App" className="container-fluid">
+        <Layout title="Shop Page" description="E-commerce App" className="container-fluid mt-4">
             <div className="row">
                 <div className="col-3">
                     <h4>Filter By Categories</h4>

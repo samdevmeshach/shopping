@@ -13,7 +13,8 @@ const Card = ({
                   cartUpdate = false,
                   showRemoveProductButton = false,
                   setRun = f => f,
-                  run = undefined
+                  run = undefined,
+                  style = {width: "20rem"}
                   // changeCartSize
               }) => {
     const [redirect, setRedirect] = useState(false);
@@ -96,7 +97,7 @@ const Card = ({
         );
     };
     return (
-        <div className="card ml-3 mt-3" style={{width: "20rem"}}>
+        <div className="card ml-3 mt-3" style={style}>
             <div className="card-header card-header-1 ">{product.name}</div>
             <div className="card-body">
                 {shouldRedirect(redirect)}

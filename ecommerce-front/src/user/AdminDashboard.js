@@ -23,6 +23,11 @@ const AdminDashboard = () => {
                         <Link className="nav-link" to="/create/product">Create Product</Link>
                     </li>
                 </ul>
+                <ul className="list-group">
+                    <li className="list-group-item">
+                        <Link className="nav-link" to="/admin/orders">Orders</Link>
+                    </li>
+                </ul>
             </div>
         )
     }
@@ -42,7 +47,8 @@ const AdminDashboard = () => {
 
 
     return (
-        <Layout title="Dashboard" description={`G'day ${name}!`} className="container-fluid"> 
+        <Layout title="Dashboard" description={`G'day ${name}!`} className="container-fluid mt-4">
+            <h2 className="text-secondary text-sm-center mt-2 mb-5">Admin Dashboard</h2>
             <div className="row">
                 <div className="col-3">
                     {adminLinks()}

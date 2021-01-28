@@ -41,18 +41,19 @@ const Product = (props) => {
     return (
         <Layout title="Product Page" description="" className="container-fluid">
             <div className="row ml-3">
-                <div className="col-5">
+                <div className="col-5 mt-4">
                     {
                         product &&
                         product.description &&
                         <Card
                             product={product}
                             showViewProductButton={false}
+                            style={{width: "30rem"}}
                         />
                     }
                 </div>
                 <div className="col-sm-7">
-                    <h2>Related Products</h2>
+                    <h2 className="text-secondary text-sm-center mt-4">Related Products</h2>
                     <div className="row">
                         {
                             relatedProduct.map((product,i) => {

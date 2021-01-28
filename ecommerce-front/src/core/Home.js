@@ -35,14 +35,14 @@ const Home = () => {
     return (
             <Layout title="Home Page" description="E-commerce App" className="container-fluid mt-4">
                 <Search />
-                <h2>New Arrival</h2>
+                <h2 className="text-secondary text-sm-center mt-2">New Arrival</h2>
                 <div className="row">
                     { productsByArrival.map((product,i) => {
                         return <Card product={product} key={i} />
                     })}
                 </div>
                 <hr />
-                <h2>Best Seller</h2>
+                <h2 className="text-secondary text-sm-center mt-2">Best Seller</h2>
                 <div className="row">
                     { productsBySell.map((product,i) => {
                         return <Card product={product} key={i} />

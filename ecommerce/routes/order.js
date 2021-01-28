@@ -3,10 +3,11 @@ const router = express.Router();
 
 const {requireSignin,isAuth,isAdmin} = require("../controllers/auth")
 const {userById,orderHistory} = require("../controllers/user")
-const {create} = require("../controllers/order")
+const {create,listOrders} = require("../controllers/order")
 const {decreaseQuantity} = require("../controllers/product")
 
 router.post('/order/create/:userId',requireSignin,isAuth,orderHistory,decreaseQuantity,create)
+router.get('/order/list/:userId',requireSignin,isAuth,isAdmin,listOrders)
 
 router.param('userId',userById)
 

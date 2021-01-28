@@ -71,7 +71,7 @@ const Signup = ()=>{
     )
 
     return (
-        <Layout title="Signup" description="Signin to E-commerce App" className="container col-md-8 offset-md-2">
+        <Layout title="Signup" description="Signin to E-commerce App" className="container col-md-8 offset-md-2 mt-lg-5">
             {showSuccess()}
             {showError()}
             {signUpForm()}

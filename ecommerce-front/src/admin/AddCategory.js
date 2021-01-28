@@ -35,19 +35,22 @@ const AddCategory = () => {
     }
 
     const newCategoryForm = () => (
-        <form onSubmit={clickSubmit}>
-            <div className="form-group">
-                <label className="text-muted">Name</label>
-                <input 
-                    type="text" 
-                    className="form-control" 
-                    onChange={handleChange}
-                    value={name}
-                    autoFocus
-                />
-            </div>
-            <button className="btn btn-outline-primary">Create Category</button>
-        </form>
+        <div>
+            <h2 className="text-secondary text-sm-center">Add New Category</h2>
+            <form onSubmit={clickSubmit}>
+                <div className="form-group mt-4">
+                    <label className="text-muted">Name</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        onChange={handleChange}
+                        value={name}
+                        autoFocus
+                    />
+                </div>
+                <button className="btn btn-outline-primary">Create Category</button>
+            </form>
+        </div>
     )
 
     const handleClose = (event, reason) => {
@@ -95,7 +98,7 @@ const AddCategory = () => {
     )
 
     return(
-        <Layout title="Add a new category" description={`G'day ${user.name}, Ready to add category `} className="container-fluid"> 
+        <Layout title="Add a new category" description={`G'day ${user.name}, Ready to add category `} className="container-fluid mt-5">
             <div className="row">
                 <div className="col-md-8 offset-md-2">
                     {showError()}

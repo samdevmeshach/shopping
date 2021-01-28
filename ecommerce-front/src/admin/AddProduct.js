@@ -8,6 +8,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -132,81 +133,91 @@ const init = () => {
         </Backdrop>)
     )
 
+    const goBack = () => (
+        <div className="mt-2 mb-5">
+            <Link to="/admin/dashboard" className="text-warning">Back to Dashboard </Link>
+        </div>
+    )
+
     const newProduct =() => (
-        <form className="mb-3" onSubmit={clickSubmit}>
-            <h4>Photo</h4>
-            <div className="form-group">
-                <label className="btn btn-secondary">
+        <div>
+            <h2 className="text-secondary text-sm-center mt-3">Add New Product</h2>
+            <form className="mb-3 mt-3" onSubmit={clickSubmit}>
+                <h4>Photo</h4>
+                <div className="form-group">
+                    <label className="btn btn-secondary">
+                        <input
+                            type="file"
+                            name="photo"
+                            accept="image/*"
+                            onChange={handleChange("photo")}
+                        />
+                    </label>
+                </div>
+                <div className="form-group">
+                    <label className="text-muted">Name</label>
                     <input
-                        type="file"
-                        name="photo"
-                        accept="image/*"
-                        onChange={handleChange("photo")}
+                        type="text"
+                        className="form-control"
+                        onChange={handleChange("name")}
+                        value={name}
                     />
-                </label>
-            </div>
-            <div className="form-group">
-                <label className="text-muted">Name</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    onChange={handleChange("name")}
-                    value={name}
-                />
-            </div>
-            <div className="form-group">
-                <label className="text-muted">Description</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    onChange={handleChange("description")}
-                    value={description}
-                />
-            </div>
-            <div className="form-group">
-                <label className="text-muted">Price</label>
-                <input
-                    type="number"
-                    className="form-control"
-                    onChange={handleChange("price")}
-                    value={price}
-                />
-            </div>
-            <div className="form-group">
-                <label className="text-muted">Category</label>
-                <select className="form-control" onChange={handleChange("category")} value={category}>
-                    <option> Please select</option>
+                </div>
+                <div className="form-group">
+                    <label className="text-muted">Description</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        onChange={handleChange("description")}
+                        value={description}
+                    />
+                </div>
+                <div className="form-group">
+                    <label className="text-muted">Price</label>
+                    <input
+                        type="number"
+                        className="form-control"
+                        onChange={handleChange("price")}
+                        value={price}
+                    />
+                </div>
+                <div className="form-group">
+                    <label className="text-muted">Category</label>
+                    <select className="form-control" onChange={handleChange("category")} value={category}>
+                        <option> Please select</option>
                         {categories && categories.map((c,i) => (<option key={i} value={c._id}>{c.name}</option>))}
-                </select>
-            </div>
-            <div className="form-group">
-                <label className="text-muted">Shipping</label>
-                <select className="form-control" onChange={handleChange("shipping")}>
-                    <option> Please select</option>
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </select>
-            </div>
-            <div className="form-group">
-                <label className="text-muted">Quantity</label>
-                <input
-                    type="number"
-                    className="form-control"
-                    onChange={handleChange("quantity")}
-                    value={quantity}
-                />
-            </div>
-            <button className="btn btn-primary"> Create Product</button>{showLoading()}
-        </form>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label className="text-muted">Shipping</label>
+                    <select className="form-control" onChange={handleChange("shipping")}>
+                        <option> Please select</option>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label className="text-muted">Quantity</label>
+                    <input
+                        type="number"
+                        className="form-control"
+                        onChange={handleChange("quantity")}
+                        value={quantity}
+                    />
+                </div>
+                <button className="btn btn-primary"> Create Product</button>{showLoading()}
+            </form>
+        </div>
     )
 
     return(
-        <Layout title="Add a new product" description={`G'day ${user.name}, Ready to add product `} className="container-fluid"> 
+        <Layout title="Add a new product" description={`G'day ${user.name}, Ready to add product `} className="container-fluid mt-4">
             <div className="row">
                 <div className="col-md-8 offset-md-2">
                     {showError()}
                     {showSuccess()}
                     {newProduct()}
+                    {goBack()}
                 </div>
             </div>
         </Layout>
