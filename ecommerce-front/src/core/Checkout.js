@@ -3,11 +3,14 @@ import { isAuthenticated } from '../auth';
 import { Link } from 'react-router-dom';
 import {createOrder} from './apiCore'
 import {deleteCart} from './cartHelper'
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 
 const Checkout = ({ products, setRun = f => f, run = undefined }) => {
 
     const {user,token} = isAuthenticated()
     const [error,setError] = useState(false)
+    const [success,setSuccess] = useState(false)
     const [address,setAddress] = useState()
 
     const getTotal = () => {
@@ -28,9 +31,25 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
             }else{
                 deleteCart()
                 setRun(!run);
+                setSuccess(true)
             }
         })
     }
+
+    const handleCloseSuccess = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSuccess(false)
+    };
+
+    const showSuccess =() => (
+        <Snackbar open={success} autoHideDuration={6000} onClose={handleCloseSuccess}>
+            <Alert onClose={handleCloseSuccess} severity="success">
+                Checked out successfully
+            </Alert>
+        </Snackbar>
+    )
 
     const handleChange = (event) => {
         setAddress(event.target.value)
@@ -88,6 +107,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
             </table>
             <h4 className="mt-0 float-right">Total: Rs.{getTotal()}</h4>
             {showCheckout()}
+            {showSuccess()}
         </div>
     );
 };

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect,useHistory } from 'react-router-dom';
 import ShowImage from './ShowImage';
 import moment from 'moment';
+import {FaCartPlus} from 'react-icons/fa'
 import { addItem, updateItem, removeItem } from './cartHelper';
-
-// import '../App.css';
 
 const Card = ({
                   product,
@@ -14,24 +13,19 @@ const Card = ({
                   showRemoveProductButton = false,
                   setRun = f => f,
                   run = undefined,
-                  style = {width: "20rem"}
+                  style = {width: "15rem",cursor:"pointer"}
                   // changeCartSize
               }) => {
     const [redirect, setRedirect] = useState(false);
     const [count, setCount] = useState(product.count);
+    let history = useHistory();
 
-    const showViewButton = showViewProductButton => {
-        return (
-            showViewProductButton && (
-                <Link to={`/product/${product._id}`} className="mr-2">
-                    <button className="btn btn-outline-primary mt-2 mb-2 card-btn-1">View Product</button>
-                </Link>
-            )
-        );
-    };
+
+    const productPage = () => {
+        history.push(`/product/${product._id}`);
+    }
 
     const addToCart = () => {
-        // console.log('added');
         addItem(product,() => setRedirect(true));
     };
 
@@ -44,7 +38,7 @@ const Card = ({
     const showAddToCartBtn = showAddToCartButton => {
         return (
             showAddToCartButton && (
-                <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2 card-btn-1  ">
+                <button onClick={addToCart} className="btn btn-sm btn-warning">
                     Add to cart
                 </button>
             )
@@ -71,7 +65,7 @@ const Card = ({
         return (
             cartUpdate && (
                 <div>
-                    <div className="input-group mb-3">
+                    <div className="input-group ">
                         <div className="input-group-prepend">
                             <span className="input-group-text">Adjust Quantity</span>
                         </div>
@@ -89,7 +83,7 @@ const Card = ({
                         removeItem(product._id);
                         setRun(!run); // run useEffect in parent Cart
                     }}
-                    className="btn btn-outline-danger mt-2 mb-2"
+                    className="btn btn-danger"
                 >
                     Remove Product
                 </button>
@@ -98,25 +92,22 @@ const Card = ({
     };
     return (
         <div className="card ml-3 mt-3" style={style}>
-            <div className="card-header card-header-1 ">{product.name}</div>
-            <div className="card-body">
+            <div className="card-body" onClick={productPage}>
                 {shouldRedirect(redirect)}
                 <ShowImage item={product} url="product" />
-                <p className="card-p  mt-2">{product.description.substring(0, 100)} </p>
-                <p className="card-p black-10">Rs.{product.price}</p>
-                <p className="black-9">Category: {product.category && product.category.name}</p>
-                <p className="black-8">Added on {moment(product.createdAt).fromNow()}</p>
+                <div className="text-monospace">{product.name} </div>
+                <div className="text-monospace">Rs.{product.price}</div>
+                <div className="text-monospace">Category: {product.category && product.category.name}</div>
+                <div className="text-monospace">Added on {moment(product.createdAt).fromNow()}</div>
                 {showStock(product.quantity)}
-                <br />
+                {/*<br />*/}
 
                 {showCartUpdateOptions(cartUpdate)}
 
-                {showViewButton(showViewProductButton)}
-
-                {showAddToCartBtn(showAddToCartButton)}
-
-                {showRemoveButton(showRemoveProductButton)}
+                {/*{showViewButton(showViewProductButton)}*/}
             </div>
+            {showAddToCartBtn(showAddToCartButton)}
+            {showRemoveButton(showRemoveProductButton)}
         </div>
     );
 };

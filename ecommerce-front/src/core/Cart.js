@@ -17,7 +17,7 @@ const Cart = () => {
 
     const showItems = items => {
         return (
-            <div>
+            <div >
                 <h2>Your cart has {`${items.length}`} items</h2>
                 <hr />
                 {items.map((product, i) => (
@@ -51,7 +51,7 @@ const Cart = () => {
         <Layout title="Shopping Cart" description="Checkout now!" className="container-fluid mt-4">
             <div className="row">
                 <div className="col-6">
-                    {items.length > 0 ? showItems(items) : noItemsMessage()}
+                        {items.length > 0 ? showItems(items) : noItemsMessage()}
                 </div>
                 <div className="col-6">
                     <h2>Your Cart Summary</h2>

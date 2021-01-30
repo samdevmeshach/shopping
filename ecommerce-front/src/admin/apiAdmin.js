@@ -66,3 +66,20 @@ export const listOrders = (userId,token) => {
             console.log(err)
         })
 }
+
+export const getStatusValue = (userId,token) => {
+    return fetch(`${API}/order/status-value/${userId}`, {
+        method :"GET",
+        headers:{
+            Accept:'application/json',
+            "Content-Type" : 'application/json',
+            Authorization:`Bearer ${token}`
+        },
+    })
+        .then(response =>{
+            return response.json();
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}

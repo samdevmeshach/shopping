@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Layout from './Layout'
-import {getProducts,getCategories,getFilteredProducts} from "./apiCore";
+import {getCategories,getFilteredProducts} from "./apiCore";
 import Checkbox from "./Checkbox";
 import {prices} from './fixedPrice'
 import RadioBox from './RadioBox'
@@ -76,7 +76,7 @@ const Shop = () => {
     const loadMore = () => {
 
         let toSkip = skip + limit
-
+        setLimit(toSkip)
         getFilteredProducts(toSkip,limit,myFilter.filter).then((data) => {
             if(data.error){
                 setError(data.error)
@@ -101,7 +101,7 @@ const Shop = () => {
     return(
         <Layout title="Shop Page" description="E-commerce App" className="container-fluid mt-4">
             <div className="row">
-                <div className="col-3">
+                <div className="col-2 mt-3">
                     <h4>Filter By Categories</h4>
                     <ul>
                         <Checkbox
@@ -118,7 +118,7 @@ const Shop = () => {
                         />
                     </div>
                 </div>
-                <div className="col-9">
+                <div className="col-10">
                     <div className="row">
                         { filterdResults.map((product,i) => {
                             return <Card product={product} key={i} />

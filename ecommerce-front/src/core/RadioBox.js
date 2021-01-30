@@ -1,11 +1,11 @@
 import React,{useState} from 'react'
 
 const RadioBox = ({prices,handleFilter}) => {
-    const [value,setValue] = useState(0)
+    // const [value,setValue] = useState(0)
 
     const handleChange = (event) => {
         handleFilter(event.target.value)
-        setValue(event.target.value)
+        // setValue(event.target.value)
     }
 
     return prices.map((p,i) => (

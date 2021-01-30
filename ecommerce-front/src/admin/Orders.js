@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {isAuthenticated} from '../auth'
-import {listOrders} from "./apiAdmin";
+import {listOrders,getStatusValue} from "./apiAdmin";
 import Layout from "../core/Layout";
 import {Link} from 'react-router-dom'
 import moment from "moment";
@@ -8,24 +8,56 @@ import moment from "moment";
 
 const Order = () => {
     const [orders,setOrders] = useState([])
+    const [statusValues,setStatusValues] = useState([])
     const [error,setError] = useState(false)
 
 const {user,token} = isAuthenticated()
 
 
     useEffect(() => {
-        list()
+        loadOrders()
+        loadStatus()
     },[])
 
-    const list = () => {
+    const loadOrders = () => {
         listOrders(user._id,token).then(data => {
             if(data.error){
                 setError(data.error)
             }else {
                 setOrders(data)
-                console.log(orders)
+                console.log(data)
             }
         })
+    }
+    const loadStatus = () => {
+        getStatusValue(user._id,token).then(data => {
+            if(data.error){
+                setError(data.error)
+            }else {
+                setStatusValues(data)
+                console.log(statusValues)
+            }
+        })
+    }
+
+    const handleStatusChange = () => {
+        //
+    }
+
+    const showStatus = o => {
+        return(
+            <div className="form-group">
+                <h3 className="mark mb-4"> Status : {o.status}</h3>
+                <select className="form-control" onChange={(event) => handleStatusChange(event,o._id)}>
+                    <option>Update Status</option>
+                    {statusValues.map((status,index) => (
+                        <option key={index} value={status}>
+                            {status}
+                        </option>
+                    ))}
+                </select>
+            </div>
+        )
     }
 
 
@@ -78,10 +110,10 @@ const {user,token} = isAuthenticated()
                                 <h2 className="mt-2 btn-primary">Order ID : {o._id}</h2>
                                 <ul className="list-group mb-2">
                                     <li className="list-group-item">
-                                        {o.status}
+                                        {showStatus(o)}
                                     </li>
                                     <li className="list-group-item">
-                                        Amount : Rs. {o.status}
+                                        Amount : Rs. {o.amount}
                                     </li>
                                     <li className="list-group-item">
                                         Ordered By : {o.user.name}
