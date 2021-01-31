@@ -13,7 +13,8 @@ const Card = ({
                   showRemoveProductButton = false,
                   setRun = f => f,
                   run = undefined,
-                  style = {width: "15rem",cursor:"pointer"}
+                  style = {width: "15rem",cursor:"pointer"},
+                  imageStyle={maxHeight:"200px",maxWidth:"200px",width:"200px",height:"200px"}
                   // changeCartSize
               }) => {
     const [redirect, setRedirect] = useState(false);
@@ -77,7 +78,7 @@ const Card = ({
     };
     const showRemoveButton = showRemoveProductButton => {
         return (
-            showRemoveProductButton && (
+                showRemoveProductButton && (
                 <button
                     onClick={() => {
                         removeItem(product._id);
@@ -94,7 +95,7 @@ const Card = ({
         <div className="card ml-3 mt-3" style={style}>
             <div className="card-body" onClick={productPage}>
                 {shouldRedirect(redirect)}
-                <ShowImage item={product} url="product" />
+                <ShowImage item={product} url="product" imageStyle={imageStyle} />
                 <div className="text-monospace">{product.name} </div>
                 <div className="text-monospace">Rs.{product.price}</div>
                 <div className="text-monospace">Category: {product.category && product.category.name}</div>
@@ -102,10 +103,11 @@ const Card = ({
                 {showStock(product.quantity)}
                 {/*<br />*/}
 
-                {showCartUpdateOptions(cartUpdate)}
+
 
                 {/*{showViewButton(showViewProductButton)}*/}
             </div>
+            {showCartUpdateOptions(cartUpdate)}
             {showAddToCartBtn(showAddToCartButton)}
             {showRemoveButton(showRemoveProductButton)}
         </div>

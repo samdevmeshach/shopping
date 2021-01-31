@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { isAuthenticated } from '../auth';
 import { Link } from 'react-router-dom';
 import {createOrder} from './apiCore'
-import {deleteCart} from './cartHelper'
+import {deleteCart, removeItem} from './cartHelper'
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 
@@ -83,6 +83,17 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                             <td>{product.count}</td>
                             <td>{product.price}</td>
                             <td>{product.price*product.count}</td>
+                            <td>
+                                <button
+                                    type="button" className="btn btn-sm btn-outline-danger" aria-label="Close"
+                                    onClick={() => {
+                                        removeItem(product._id);
+                                        setRun(!run); // run useEffect in parent Cart
+                                    }}
+                                >
+                                    X
+                                </button>
+                            </td>
                         </tr>
                     )
                 })}
@@ -101,6 +112,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                     <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
                     <th scope="col">Subtotal</th>
+                    <th scope="col">Remove</th>
                 </tr>
                 </thead>
                 {checkOutTable()}

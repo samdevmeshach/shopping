@@ -49,6 +49,7 @@ const Product = (props) => {
                             product={product}
                             showViewProductButton={false}
                             style={{width: "30rem"}}
+                            imageStyle={{maxHeight: "300px", maxWidth: "400px", width: "400px", height: "300px"}}
                         />
                     }
                 </div>
