@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {isAuthenticated} from '../auth'
-import {listOrders,getStatusValue} from "./apiAdmin";
+import {listOrders,getStatusValue,updateOrderStatus} from "./apiAdmin";
 import Layout from "../core/Layout";
 import {Link} from 'react-router-dom'
 import moment from "moment";
@@ -40,8 +40,14 @@ const {user,token} = isAuthenticated()
         })
     }
 
-    const handleStatusChange = () => {
-        //
+    const handleStatusChange = (e,orderId) => {
+        updateOrderStatus(user._id,token,orderId,e.target.value).then(data => {
+            if(data.error){
+                console.log(data.error)
+            }else{
+                loadOrders()
+            }
+        })
     }
 
     const showStatus = o => {

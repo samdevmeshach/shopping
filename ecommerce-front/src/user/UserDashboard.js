@@ -6,7 +6,7 @@ import Layout from '../core/Layout'
 
 const Dashboard = () => {
 
-    const {user:{name,email,role}} = isAuthenticated()
+    const {user:{name,email,role,_id}} = isAuthenticated()
 
 
     const userLinks = () => {
@@ -20,7 +20,7 @@ const Dashboard = () => {
                 </ul>
                 <ul className="list-group">
                     <li className="list-group-item">
-                        <Link className="nav-link" to="/profile/update">Update Profile</Link>
+                        <Link className="nav-link" to={`/profile/${_id}`}>Update Profile</Link>
                     </li>
                 </ul>
             </div>
@@ -54,7 +54,7 @@ const Dashboard = () => {
 
 
     return (
-        <Layout title="Dashboard" description="User Dashboard" className="container-fluid"> 
+        <Layout title="Dashboard" description="User Dashboard" className="container-fluid mt-5">
             <div className="row">
                 <div className="col-3">
                     {userLinks()}
