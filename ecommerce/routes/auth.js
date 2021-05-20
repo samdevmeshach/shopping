@@ -4,7 +4,7 @@ const {userSignupValidator} = require("../validator")
 const router = express.Router();
 
 router.post("/signup",userSignupValidator,signup)
-router.post("/signin",signin)
+router.post("/signin",signin);
 router.post("/signout",signout)
 
 module.exports = router
